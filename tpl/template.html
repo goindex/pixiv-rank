@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Pixiv 排行榜 - 插画</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Pixiv 排行榜 - 插画">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sukkalab/pixiv@1.0/assets/css/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.loli.net/css?family=Source+Sans+Pro:300,300italic,400,400italic">
+    <meta property="og:title" content="Pixiv 排行榜 - 插画">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://domain.name">
+    <meta property="og:description" content="Pixiv 排行榜 - 插画">
+    <meta name="twitter:card" content="summary">
+</head>
+
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1>
+                <a href="https://domain.name"><strong>Pixiv Rank</strong></a> - illust
+            </h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#footer" class="icon fa-info-circle">
+                            Just for fun!
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+            {{main}}
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@8.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/gh/sukkalab/pixiv@1.0/assets/js/jquery.poptrox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ajlkn/responsive-tools@1.0/dist/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ajlkn/responsive-tools@1.0/dist/breakpoints.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/sukkalab/pixiv@1.0/assets/js/util.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/sukkalab/pixiv@1.0/assets/js/main.min.js"></script>
+    <script>
+        var myLazyLoad = new LazyLoad({
+            elements_selector: ".lazyload"
+        });
+    </script>
+    <script>!function (a, b, c, d, e) { var f = c.screen, g = encodeURIComponent, h = ["ga=" + a, "dt=" + g(d.title), "dr=" + g(d.referrer), "ul=" + (e.language || e.browserLanguage || e.userLanguage), "sd=" + f.colorDepth + "-bit", "sr=" + f.width + "x" + f.height, "vp=" + Math.max(d.documentElement.clientWidth, c.innerWidth || 0) + "x" + Math.max(d.documentElement.clientHeight, c.innerHeight || 0), "z=" + +new Date]; c.__ga_img = new Image, c.__ga_img.src = b + "?" + h.join("&") }("UA-122669675-3", "https://ga.giuem.com", window, document, navigator, location);</script>
+</body>
+
+</html>
