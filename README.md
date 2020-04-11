@@ -14,3 +14,9 @@ vim rank.py
 _USERNAME = "username"
 _PASSWORD = "password"
 ```
+
+## 运行
+
+```bash
+python3 rank.py
+```
