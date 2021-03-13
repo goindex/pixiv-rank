@@ -254,9 +254,11 @@ class AppPixivAPI(BasePixivAPI):
     #   partial_match_for_tags  - 标签部分一致
     #   exact_match_for_tags    - 标签完全一致
     #   title_and_caption       - 标题说明文
-    # sort: [date_desc, date_asc]
+    # sort: [date_desc, date_asc, popular_desc] - popular_desc为会员的热门排序
     # duration: [within_last_day, within_last_week, within_last_month]
+    # start_date, end_date: '2020-07-01'
     def search_illust(self, word, search_target='partial_match_for_tags', sort='date_desc', duration=None,
+                      start_date=None, end_date=None,
                       filter='for_ios', offset=None, req_auth=True):
         url = '%s/v1/search/illust' % self.hosts
         params = {
@@ -265,6 +267,10 @@ class AppPixivAPI(BasePixivAPI):
             'sort': sort,
             'filter': filter,
         }
+        if (start_date):
+            params['start_date'] = start_date
+        if (end_date):
+            params['end_date'] = end_date
         if (duration):
             params['duration'] = duration
         if (offset):
@@ -299,8 +305,6 @@ class AppPixivAPI(BasePixivAPI):
         if (offset):
             params['offset'] = offset
         r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)
-        print(r.url)
-        print(r.text)
         return self.parse_result(r)
 
     def search_user(self, word, sort='date_desc', duration=None,
@@ -348,6 +352,25 @@ class AppPixivAPI(BasePixivAPI):
         url = '%s/v1/illust/bookmark/delete' % self.hosts
         data = {
             'illust_id': illust_id,
+        }
+        r = self.no_auth_requests_call('POST', url, data=data, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 关注用户
+    def user_follow_add(self, user_id, restrict='public', req_auth=True):
+        url = '%s/v1/user/follow/add' % self.hosts
+        data = {
+            'user_id': user_id,
+            'restrict': restrict
+        }
+        r = self.no_auth_requests_call('POST', url, data=data, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 取消关注用户
+    def user_follow_delete(self, user_id, req_auth=True):
+        url = '%s/v1/user/follow/delete' % self.hosts
+        data = {
+            'user_id': user_id
         }
         r = self.no_auth_requests_call('POST', url, data=data, req_auth=req_auth)
         return self.parse_result(r)
@@ -419,6 +442,50 @@ class AppPixivAPI(BasePixivAPI):
         url = '%s/v1/ugoira/metadata' % self.hosts
         params = {
             'illust_id': illust_id,
+        }
+
+        r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 用户小说列表
+    def user_novels(self, user_id, filter='for_ios', offset=None, req_auth=True):
+        url = '%s/v1/user/novels' % self.hosts
+        params = {
+            'user_id': user_id,
+            'filter': filter,
+        }
+        if (offset):
+            params['offset'] = offset
+        r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 小说系列详情
+    def novel_series(self, series_id, filter='for_ios', last_order=None, req_auth=True):
+        url = '%s/v2/novel/series' % self.hosts
+        params = {
+            'series_id': series_id,
+            'filter': filter,
+        }
+        if (last_order):
+            params['last_order'] = last_order
+        r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 小说详情
+    def novel_detail(self, novel_id, req_auth=True):
+        url = '%s/v2/novel/detail' % self.hosts
+        params = {
+            'novel_id': novel_id,
+        }
+
+        r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)
+        return self.parse_result(r)
+
+    # 小说正文
+    def novel_text(self, novel_id, req_auth=True):
+        url = '%s/v1/novel/text' % self.hosts
+        params = {
+            'novel_id': novel_id,
         }
 
         r = self.no_auth_requests_call('GET', url, params=params, req_auth=req_auth)

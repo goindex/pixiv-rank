@@ -9,15 +9,14 @@ import linecache
 from pixivpy3 import *
 
 if sys.version_info >= (3, 0):
-    import imp
-    imp.reload(sys)
+    import importlib
+    importlib.reload(sys)
 else:
     reload(sys)
     sys.setdefaultencoding('utf8')
 sys.dont_write_bytecode = True
 
-_USERNAME = "username"
-_PASSWORD = "password"
+_REFRESH_TOKEN = "YOUR TOKEN"
 _TEST_WRITE = False
 
 def make_dir():
@@ -39,7 +38,7 @@ def create_html(aapi):
         image_id = str(id)
         image_title = str(title)
         image_author = str(author)
-        image_large = str(image_urls.replace('i.pximg.net', 'i.pixiv.cat'))
+        image_large = str(image_urls.replace('i.pximg.net', 'www.lollipop.workers.dev'))
         image_original_temp = str(image_large.replace('/c/600x1200_90_webp/img-master', '/img-original'))
         image_original = str(image_original_temp.replace('_master1200', ''))
         if status_code(image_original) == 404:
@@ -99,7 +98,7 @@ def remove_dir():
 
 def main():
     aapi = AppPixivAPI()
-    aapi.login(_USERNAME, _PASSWORD)
+    aapi.auth(refresh_token=_REFRESH_TOKEN)
     make_dir()
     create_html(aapi)
     remove_dir()
